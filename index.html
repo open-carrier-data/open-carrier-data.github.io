@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Open Carrier Data</title>
+    <meta
+      name="description"
+      content="A syncable public carrier settings database for open-source phone systems and generated local carrier configuration."
+    >
+    <meta property="og:title" content="Open Carrier Data">
+    <meta
+      property="og:description"
+      content="A public source database for generated local APN, CarrierConfig, IMS, MMS, RCS, and eSIM settings."
+    >
+    <meta property="og:image" content="https://open-carrier-data.github.io/assets/social-preview.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://open-carrier-data.github.io/">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Open Carrier Data home">
+        <img class="brand-mark" src="./assets/icon-192.png" alt="" aria-hidden="true">
+        <span>Open Carrier Data</span>
+      </a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <a href="#model">Model</a>
+        <a href="#community">Community</a>
+        <a href="#report">Report</a>
+        <a href="#snapshot">Snapshot</a>
+        <a href="#schema">Schema</a>
+        <a href="#android">Android</a>
+        <a href="https://github.com/open-carrier-data/open-carrier-data">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Public carrier settings database</p>
+          <h1>Carrier data that phones can use locally.</h1>
+          <p class="intro">
+            Open Carrier Data stores neutral carrier profiles for APNs, MMS,
+            IMS capabilities, RCS, eSIM support, and Android CarrierConfig
+            values. Stable data comes from maintained sources. Community input
+            is accepted as checked claims, kept separate, and promoted only when
+            it is safe enough.
+          </p>
+          <div class="hero-actions" aria-label="Primary links">
+            <a class="button primary" href="#snapshot">Use the snapshot</a>
+            <a class="button secondary" href="https://github.com/open-carrier-data/open-carrier-data">
+              View repository
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-preview" aria-label="Carrier profile preview">
+          <div class="preview-header">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="file-name">carrier-profile.json</span>
+          </div>
+          <pre><code>{
+  "schema_version": 1,
+  "profile_id": "open.00101.9739cf7d0409",
+  "display_name": "Example Mobile",
+  "match": {
+    "mccmnc": ["00101"],
+    "android_carrier_ids": [1234],
+    "spn": ["Example"]
+  },
+  "capabilities": {
+    "volte": "supported",
+    "vowifi": "supported",
+    "mms": "supported"
+  },
+  "addons": {
+    "wifi_calling": {
+      "hide_menu_on_auth_failure": true
+    }
+  },
+  "android_apns": [
+    {
+      "name": "Example internet",
+      "apn": "internet.example",
+      "types": ["default", "supl"]
+    }
+  ]
+}</code></pre>
+        </div>
+      </section>
+
+      <section class="overview-band" aria-label="What the database covers">
+        <div class="overview-item">
+          <span class="item-label">Identify</span>
+          <strong>Carrier matching</strong>
+          <p>MCC/MNC, Android carrier ID, SPN, GID, ICCID-prefix, and IMSI-prefix matching facts.</p>
+        </div>
+        <div class="overview-item">
+          <span class="item-label">Connect</span>
+          <strong>APN and MMS</strong>
+          <p>Data, MMS, IMS, XCAP, and related APN records.</p>
+        </div>
+        <div class="overview-item">
+          <span class="item-label">Enable</span>
+          <strong>IMS features</strong>
+          <p>VoLTE, Wi-Fi Calling, VoNR, SMS over IMS, and conference support.</p>
+        </div>
+        <div class="overview-item">
+          <span class="item-label">Generate</span>
+          <strong>Local output</strong>
+          <p>CarrierConfig, APN, and lookup data for ROM tooling.</p>
+        </div>
+      </section>
+
+      <section id="model" class="content-section">
+        <div class="section-heading">
+          <p class="eyebrow">Model</p>
+          <h2>Import once, use locally.</h2>
+          <p>
+            Open Carrier Data is not a live lookup API. It is a public source
+            database that tooling can convert into files or app data a phone
+            already has when carrier settings are needed.
+          </p>
+        </div>
+
+        <div class="flow-grid">
+          <div class="flow-step">
+            <span>1</span>
+            <strong>Import maintained sources</strong>
+            <p>Refresh upstream, vendor, or open-source carrier data through source adapters.</p>
+          </div>
+          <div class="flow-step">
+            <span>2</span>
+            <strong>Publish profiles</strong>
+            <p>Store canonical neutral carrier JSON under <code>carriers/</code>.</p>
+          </div>
+          <div class="flow-step">
+            <span>3</span>
+            <strong>Generate outputs</strong>
+            <p>Create manifests and platform-specific output under <code>generated/</code>.</p>
+          </div>
+          <div class="flow-step">
+            <span>4</span>
+            <strong>Use locally</strong>
+            <p>ROMs, carrier apps, or update tools package the generated data.</p>
+          </div>
+        </div>
+
+        <div class="note-box">
+          <strong>Why local?</strong>
+          <p>
+            Carrier settings are needed during SIM load, network attach, IMS
+            registration, calling, messaging, and emergency flows. Those paths
+            should not depend on a network request to this project.
+          </p>
+        </div>
+      </section>
+
+      <section id="community" class="content-section muted">
+        <div class="section-heading">
+          <p class="eyebrow">Community</p>
+          <h2>Community data enters as claims, not silent defaults.</h2>
+          <p>
+            Community reports are important for edge cases and fast fixes, but
+            they should not directly overwrite stable phone configuration. A
+            claim says what should change, how it was tested, when it was last
+            verified, and when it expires.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+          <article>
+            <h3>Stable</h3>
+            <p>
+              The default database for ROMs. It is built from maintained
+              sources, refreshed by automation, and published as
+              <code>generated/index.json</code>.
+            </p>
+          </article>
+          <article>
+            <h3>Candidate</h3>
+            <p>
+              Claims with enough evidence to test. Useful for review and opt-in
+              builds, but not default phone behavior.
+            </p>
+          </article>
+          <article>
+            <h3>Community</h3>
+            <p>
+              Valid non-expired claims from contributors. Useful for
+              investigation, missing carriers, and edge cases.
+            </p>
+          </article>
+          <article>
+            <h3>Risk</h3>
+            <p>
+              CI computes risk from the changed fields, match breadth, change
+              type, evidence, freshness, and conflicts with stable data.
+            </p>
+          </article>
+        </div>
+
+        <div class="two-column compact">
+          <div class="code-card">
+            <div class="code-title">
+              <span>Community claim</span>
+              <button type="button" data-copy="#community-claim">Copy</button>
+            </div>
+            <pre><code id="community-claim">{
+  "schema_version": 1,
+  "claim_id": "claim.example.mobile.mms.20260705",
+  "summary": "Example Mobile MMS works with this APN.",
+  "status": "proposed",
+  "carrier_match": {
+    "mccmnc": ["00101"],
+    "spn": ["Example"]
+  },
+  "change_type": "add",
+  "changes": {
+    "android_apns": [
+      {
+        "name": "Example MMS",
+        "apn": "mms.example",
+        "types": ["mms"],
+        "mmsc": "https://mms.example/mmsc"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "type": "device_test",
+      "date": "2026-07-05",
+      "result": "works",
+      "summary": "MMS send and receive were tested on one device."
+    }
+  ],
+  "last_verified": "2026-07-05",
+  "expires": "2027-07-05"
+}</code></pre>
+          </div>
+
+          <div class="note-box">
+            <strong>Why claims expire</strong>
+            <p>
+              Carrier settings change. Expiry prevents old community data from
+              looking trustworthy forever. Low-risk claims can live longer;
+              higher-risk claims need fresher evidence.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="report" class="content-section">
+        <div class="section-heading">
+          <p class="eyebrow">Report</p>
+          <h2>Found missing or wrong carrier data?</h2>
+          <p>
+            You do not need to understand the whole database first. Pick the
+            path that matches what you know, and do not share private SIM,
+            account, device, or log data.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+          <article>
+            <h3>Not sure what is wrong</h3>
+            <p>
+              Open a guided issue. Include the carrier, country, affected
+              feature, what happened, what you expected, and how you tested it.
+            </p>
+          </article>
+          <article>
+            <h3>Know a maintained source</h3>
+            <p>
+              Suggest the source. Good sources can be refreshed by automation
+              and translated into safe public carrier facts.
+            </p>
+          </article>
+          <article>
+            <h3>Tested a specific fix</h3>
+            <p>
+              Open a tested-claim issue, or fork the repo and submit a pull
+              request with a claim, evidence, test date, safe match details,
+              and an expiry date.
+            </p>
+          </article>
+          <article>
+            <h3>Improving tools or docs</h3>
+            <p>
+              Open a pull request with validator, generator, schema, importer,
+              or documentation changes and run the relevant checks.
+            </p>
+          </article>
+        </div>
+
+        <div class="note-box">
+          <strong>Stable means current enough</strong>
+          <p>
+            Private vendor or OEM snapshots must be refreshed and carry a
+            recent checked date before they can affect stable data. Checks
+            older than about six months are treated as stale. If a source stops
+            being maintained, missing data is safer than stale data that still
+            looks official.
+          </p>
+        </div>
+
+        <div class="two-column compact">
+          <div class="note-box">
+            <strong>Safe details to share</strong>
+            <p>
+              Carrier name, country, public brand, MCC/MNC, Android carrier ID,
+              SPN, GID prefix, public source link, tested feature, result, and
+              test date. Public APN usernames/passwords are okay only when they
+              are carrier settings, not private account credentials.
+            </p>
+          </div>
+          <div class="note-box">
+            <strong>Do not share</strong>
+            <p>
+              Phone numbers, account data, personal passwords, private vendor
+              credentials, full IMSI, full ICCID, IMEI, serial numbers, raw
+              logs, raw bugreports, raw firmware dumps, or private vendor
+              responses.
+            </p>
+          </div>
+        </div>
+
+        <div class="hero-actions" aria-label="Contribution links">
+          <a class="button primary" href="https://github.com/open-carrier-data/open-carrier-data/issues/new/choose">
+            Open guided issue
+          </a>
+          <a class="button secondary" href="https://github.com/open-carrier-data/open-carrier-data/blob/main/CONTRIBUTING.md">
+            Read contribution guide
+          </a>
+        </div>
+      </section>
+
+      <section id="snapshot" class="content-section muted">
+        <div class="section-heading">
+          <p class="eyebrow">Snapshot</p>
+          <h2>Sync the database, then build your format.</h2>
+          <p>
+            Treat the repository like a versioned carrier snapshot. Read the
+            generated manifest, load the listed profiles, and generate the
+            format your phone system or build pipeline consumes.
+          </p>
+        </div>
+
+        <div class="two-column">
+          <div>
+            <ol class="steps">
+              <li>Clone the repository or download a release snapshot.</li>
+              <li>Read <code>generated/index.json</code> as the snapshot manifest.</li>
+              <li>Use <code>generated/android/mccmnc-index.json</code> when the input is a SIM MCC/MNC.</li>
+              <li>Use <code>generated/android/carrier-id-index.json</code> when Android already resolved a carrier ID.</li>
+              <li>Use <code>generated/android/carrier-config-list.xml</code> when tooling wants Android-style CarrierConfig XML.</li>
+              <li>Generate local CarrierConfig, APN, or ROM-specific data.</li>
+              <li>Package or update that generated data through your normal release path.</li>
+            </ol>
+          </div>
+          <div class="code-card">
+            <div class="code-title">
+              <span>Load the snapshot</span>
+              <button type="button" data-copy="#snapshot-example">Copy</button>
+            </div>
+            <pre><code id="snapshot-example">git clone https://github.com/open-carrier-data/open-carrier-data.git
+cd open-carrier-data
+
+python3 - &lt;&lt;'PY'
+import json
+from pathlib import Path
+
+root = Path(".")
+index = json.loads((root / "generated/index.json").read_text())
+profiles = [
+    json.loads((root / entry["path"]).read_text())
+    for entry in index["profiles"]
+]
+
+print(f"loaded {len(profiles)} carrier profiles")
+# Convert profiles into local platform output.
+PY</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="schema" class="content-section">
+        <div class="section-heading">
+          <p class="eyebrow">Schema</p>
+          <h2>One format that tools can read.</h2>
+          <p>
+            Profiles expose only the fields that should be public and reusable.
+            Private source material and raw vendor dumps do not belong in this
+            repository.
+          </p>
+        </div>
+
+        <div class="schema-grid">
+          <article>
+            <h3><code>match</code></h3>
+            <p>How tooling recognizes the carrier or MVNO.</p>
+            <ul>
+              <li><code>mccmnc</code></li>
+              <li><code>android_carrier_ids</code></li>
+              <li><code>gid1_prefixes</code></li>
+              <li><code>gid2_prefixes</code></li>
+              <li><code>iccid_prefixes</code></li>
+              <li><code>imsi_prefix_patterns</code></li>
+              <li><code>spn</code></li>
+            </ul>
+          </article>
+          <article>
+            <h3><code>capabilities</code></h3>
+            <p>Simple feature states that generators can map to platform values.</p>
+            <ul>
+              <li><code>supported</code></li>
+              <li><code>unsupported</code></li>
+              <li><code>conditional</code></li>
+              <li><code>unknown</code></li>
+            </ul>
+          </article>
+          <article>
+            <h3><code>android_apns</code></h3>
+            <p>APN records for Android-style data, MMS, IMS, XCAP, and related profiles.</p>
+            <ul>
+              <li><code>name</code></li>
+              <li><code>apn</code></li>
+              <li><code>types</code></li>
+            </ul>
+          </article>
+          <article>
+            <h3><code>android_carrier_config</code></h3>
+            <p>Reviewed Android CarrierConfig key/value overrides.</p>
+            <ul>
+              <li><code>carrier_volte_available_bool</code></li>
+              <li><code>carrier_wfc_ims_available_bool</code></li>
+              <li><code>support_ims_conference_call_bool</code></li>
+            </ul>
+          </article>
+          <article>
+            <h3><code>addons</code></h3>
+            <p>Small optional neutral facts outside one generated Android field.</p>
+            <ul>
+              <li><code>wifi_calling</code></li>
+              <li><code>rcs</code></li>
+              <li><code>operator_display</code></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="android" class="content-section muted">
+        <div class="section-heading">
+          <p class="eyebrow">Android</p>
+          <h2>Generate data Android can load locally.</h2>
+          <p>
+            Android already has carrier configuration mechanisms. Open Carrier
+            Data should feed those mechanisms instead of bypassing them with
+            one-off runtime hacks.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+          <article>
+            <h3>CarrierConfig</h3>
+            <p>
+              Generate CarrierConfig values for a platform config app, carrier
+              config service, ROM build step, update package, or Android-style
+              XML asset.
+            </p>
+          </article>
+          <article>
+            <h3>APNs</h3>
+            <p>
+              Generate APN records for Android telephony provider import or ROM
+              packaging, including data, MMS, IMS, XCAP, and emergency profiles.
+            </p>
+          </article>
+          <article>
+            <h3>Carrier identity</h3>
+            <p>
+              Preserve matching facts so generators can map MCC/MNC, MVNO, SPN,
+              IMSI-prefix patterns, and carrier IDs to the right profile.
+            </p>
+          </article>
+          <article>
+            <h3>Testing</h3>
+            <p>
+              Use generated fixtures to compare expected values with device logs,
+              known good stock behavior, or upstream carrier config databases.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="examples" class="content-section">
+        <div class="section-heading">
+          <p class="eyebrow">Examples</p>
+          <h2>Write neutral profiles, generate specific output.</h2>
+        </div>
+
+        <div class="example-tabs" role="tablist" aria-label="Code examples">
+          <button type="button" class="tab active" data-tab="minimal" role="tab" aria-selected="true">
+            Minimal profile
+          </button>
+          <button type="button" class="tab" data-tab="python" role="tab" aria-selected="false">
+            MCC/MNC lookup
+          </button>
+          <button type="button" class="tab" data-tab="android" role="tab" aria-selected="false">
+            Android fields
+          </button>
+        </div>
+
+        <div class="tab-panel active" id="tab-minimal" role="tabpanel">
+          <div class="code-card wide">
+            <div class="code-title">
+              <span>Neutral public profile</span>
+              <button type="button" data-copy="#minimal-profile">Copy</button>
+            </div>
+            <pre><code id="minimal-profile">{
+  "schema_version": 1,
+  "profile_id": "open.00101.9739cf7d0409",
+  "display_name": "Example Mobile",
+  "match": {
+    "mccmnc": ["00101"],
+    "android_carrier_ids": [1234],
+    "spn": ["Example"]
+  },
+  "capabilities": {
+    "volte": "supported",
+    "vowifi": "supported",
+    "mms": "supported",
+    "rcs": "unknown"
+  },
+  "addons": {
+    "wifi_calling": {
+      "hide_menu_on_auth_failure": true
+    },
+    "operator_display": {
+      "prefer_spn": true
+    }
+  }
+}</code></pre>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-python" role="tabpanel" hidden>
+          <div class="code-card wide">
+            <div class="code-title">
+              <span>Find candidate profiles by SIM operator or carrier ID</span>
+              <button type="button" data-copy="#python-consumer">Copy</button>
+            </div>
+            <pre><code id="python-consumer">import json
+from pathlib import Path
+
+root = Path("/path/to/open-carrier-data")
+mccmnc_index = json.loads((root / "generated/android/mccmnc-index.json").read_text())
+carrier_id_index = json.loads((root / "generated/android/carrier-id-index.json").read_text())
+sim_operator = "26202"
+android_carrier_id = "2536"
+
+candidates = carrier_id_index["android_carrier_ids"].get(android_carrier_id)
+if candidates is None:
+    candidates = mccmnc_index["mccmnc"].get(sim_operator, [])
+profiles = [json.loads((root / item["path"]).read_text()) for item in candidates]
+
+# Apply remaining checks such as Android carrier ID, SPN, GID, ICCID prefix, or IMSI prefix before using a profile.
+print(f"found {len(profiles)} candidate profiles")</code></pre>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="tab-android" role="tabpanel" hidden>
+          <div class="code-card wide">
+            <div class="code-title">
+              <span>Android-facing fields</span>
+              <button type="button" data-copy="#android-values">Copy</button>
+            </div>
+            <pre><code id="android-values">{
+  "android_carrier_config": {
+    "carrier_volte_available_bool": true,
+    "carrier_wfc_ims_available_bool": true,
+    "support_ims_conference_call_bool": true
+  },
+  "android_apns": [
+    {
+      "name": "Example internet",
+      "apn": "internet.example",
+      "types": ["default", "supl"],
+      "protocol": "IPV4V6",
+      "roaming_protocol": "IPV4V6"
+    }
+  ]
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section muted">
+        <div class="section-heading">
+          <p class="eyebrow">Boundaries</p>
+          <h2>Public facts only.</h2>
+          <p>
+            The public repository should be narrow, generated, and safe to
+            mirror. Private source material can inform automated importers, but
+            it must not be published raw.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+          <article>
+            <h3>Good source data</h3>
+            <p>Maintained upstream sources that can be refreshed by automation.</p>
+          </article>
+          <article>
+            <h3>Generated output</h3>
+            <p>Derived manifests and platform exports built from the neutral profile set.</p>
+          </article>
+          <article>
+            <h3>Not public data</h3>
+            <p>Raw or full IMSI values, full personal ICCIDs, phone numbers, personal passwords, private vendor credentials, account records, raw firmware dumps, or private logs.</p>
+          </article>
+          <article>
+            <h3>Not runtime behavior</h3>
+            <p>A live API call from SIM loading, emergency calling, IMS registration, or dialer paths.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section">
+        <div class="section-heading">
+          <p class="eyebrow">Resources</p>
+          <h2>Use the public contract.</h2>
+          <p>
+            These links are the main starting points for consumers,
+            contributors, and Android integration work.
+          </p>
+        </div>
+        <div class="next-grid">
+          <a href="https://github.com/open-carrier-data/open-carrier-data" class="next-link">
+            Repository
+            <span>Browse the public database and tooling</span>
+          </a>
+          <a href="https://github.com/open-carrier-data/open-carrier-data/blob/main/schemas/carrier-profile.schema.json" class="next-link">
+            JSON schema
+            <span>Read the exact public profile format</span>
+          </a>
+          <a href="https://github.com/open-carrier-data/open-carrier-data/blob/main/schemas/community-claim.schema.json" class="next-link">
+            Claim schema
+            <span>Read the community claim format</span>
+          </a>
+          <a href="https://github.com/open-carrier-data/open-carrier-data/blob/main/CONTRIBUTING.md" class="next-link">
+            Contribution guide
+            <span>Report missing data, suggest sources, or submit tested claims</span>
+          </a>
+          <a href="https://github.com/open-carrier-data/open-carrier-data/issues/new/choose" class="next-link">
+            Guided issue form
+            <span>Use this when carrier data looks missing or wrong</span>
+          </a>
+          <a href="https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/main/generated/index.json" class="next-link">
+            Snapshot manifest
+            <span>Use it to enumerate published profiles</span>
+          </a>
+          <a href="https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/main/generated/android/mccmnc-index.json" class="next-link">
+            MCC/MNC index
+            <span>Find Android candidate profiles from a SIM operator code</span>
+          </a>
+          <a href="https://source.android.com/docs/core/connect/carrier" class="next-link">
+            AOSP CarrierConfig
+            <span>Understand Android's carrier config model</span>
+          </a>
+          <a href="https://source.android.com/docs/core/connect/update" class="next-link">
+            AOSP APN updates
+            <span>Review Android APN and CarrierConfig inputs</span>
+          </a>
+          <a href="https://github.com/GrapheneOS/platform_packages_apps_CarrierConfig2" class="next-link">
+            CarrierConfig2
+            <span>Compare a local database-backed approach</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Open Carrier Data</span>
+      <a href="https://github.com/open-carrier-data/open-carrier-data">GitHub</a>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
