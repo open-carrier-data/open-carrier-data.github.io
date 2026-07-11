@@ -30,6 +30,7 @@
       </a>
       <nav class="top-nav" aria-label="Main navigation">
         <a href="#model">Model</a>
+        <a href="#sources">Sources</a>
         <a href="#community">Community</a>
         <a href="#report">Report</a>
         <a href="#snapshot">Snapshot</a>
@@ -119,6 +120,46 @@
         </div>
       </section>
 
+      <section id="sources" class="content-section">
+        <div class="section-heading">
+          <p class="eyebrow">Sources</p>
+          <h2>Every public snapshot names its inputs.</h2>
+          <p>
+            Public upstreams are recorded by full Git commit ID and revision
+            date. Samsung observations carry OMC scope and a recent checked
+            date. Source records older than 180 days fail validation.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+          <article>
+            <h3>AOSP and LineageOS</h3>
+            <p>CarrierConfig, carrier identity, and APN data under Apache-2.0.</p>
+          </article>
+          <article>
+            <h3>Public APN data</h3>
+            <p>Mobile Broadband Provider Info uses a public-domain dedication.</p>
+          </article>
+          <article>
+            <h3>Apple bundles</h3>
+            <p>The current mirror declares no license. Only narrow transformed facts are published.</p>
+          </article>
+          <article>
+            <h3>Samsung OMC</h3>
+            <p>Firmware baselines and GRAS updates are processed privately; raw vendor material is never published.</p>
+          </article>
+        </div>
+
+        <div class="note-box">
+          <strong>Check the evidence, not a vague “updated” badge</strong>
+          <p>
+            <code>generated/evidence-index.json</code> records exact source
+            revisions, profile scope, conflicts, and quality gates for the
+            current database.
+          </p>
+        </div>
+      </section>
+
       <section id="model" class="content-section">
         <div class="section-heading">
           <p class="eyebrow">Model</p>
@@ -172,6 +213,8 @@
             they should not directly overwrite stable phone configuration. A
             claim says what should change, how it was tested, when it was last
             verified, and when it expires.
+            The validator computes overlap and conflicts against stable data;
+            contributors cannot self-approve claims.
           </p>
         </div>
 
@@ -350,6 +393,7 @@
             Treat the repository like a versioned carrier snapshot. Read the
             generated manifest, load the listed profiles, and generate the
             format your phone system or build pipeline consumes.
+            Read the evidence and Android metadata files before packaging it.
           </p>
         </div>
 
@@ -358,6 +402,7 @@
             <ol class="steps">
               <li>Clone the repository or download a release snapshot.</li>
               <li>Read <code>generated/index.json</code> as the snapshot manifest.</li>
+              <li>Read <code>generated/evidence-index.json</code> for exact sources and merge decisions.</li>
               <li>Use <code>generated/android/mccmnc-index.json</code> when the input is a SIM MCC/MNC.</li>
               <li>Use <code>generated/android/carrier-id-index.json</code> when Android already resolved a carrier ID.</li>
               <li>Use <code>generated/android/carrier-config-list.xml</code> when tooling wants Android-style CarrierConfig XML.</li>
@@ -464,6 +509,18 @@ PY</code></pre>
             Android already has carrier configuration mechanisms. Open Carrier
             Data should feed those mechanisms instead of bypassing them with
             one-off runtime hacks.
+          </p>
+        </div>
+
+        <div class="note-box">
+          <strong>Android XML has target-specific limits</strong>
+          <p>
+            The checked-in APN XML targets database version 8. The target
+            Android build must use the same version. CarrierConfig XML also
+            cannot represent GID prefixes safely because Android compares that
+            XML field exactly. Such profiles stay in neutral JSON and are
+            counted in <code>generated/android/metadata.json</code> instead of
+            being broadened.
           </p>
         </div>
 
@@ -667,6 +724,18 @@ print(f"found {len(profiles)} candidate profiles")</code></pre>
             Snapshot manifest
             <span>Use it to enumerate published profiles</span>
           </a>
+          <a href="https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/main/generated/evidence-index.json" class="next-link">
+            Source evidence
+            <span>Inspect exact revisions, scope, conflicts, and quality gates</span>
+          </a>
+          <a href="https://github.com/open-carrier-data/open-carrier-data/blob/main/SOURCES.md" class="next-link">
+            Source policy
+            <span>Understand where the data comes from and how it is merged</span>
+          </a>
+          <a href="https://github.com/open-carrier-data/open-carrier-data/blob/main/DATA-LICENSE.md" class="next-link">
+            Data rights
+            <span>Read the project waiver and upstream source limitations</span>
+          </a>
           <a href="https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/main/generated/android/mccmnc-index.json" class="next-link">
             MCC/MNC index
             <span>Find Android candidate profiles from a SIM operator code</span>
@@ -689,7 +758,7 @@ print(f"found {len(profiles)} candidate profiles")</code></pre>
 
     <footer class="site-footer">
       <span>Open Carrier Data</span>
-      <a href="https://github.com/open-carrier-data/open-carrier-data">GitHub</a>
+      <a href="https://github.com/open-carrier-data/open-carrier-data">Apache-2.0 software · source-specific data terms</a>
     </footer>
 
     <script src="./app.js"></script>

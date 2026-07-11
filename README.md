@@ -27,6 +27,8 @@ It should help a new reader quickly understand:
 - what private data must never be submitted.
 - why stale private vendor/OEM snapshots should not be published as stable
   data.
+- how exact source revisions, source terms, conflicts, and quality gates are
+  exposed in the public evidence index.
 
 The website is documentation only. Phones should not depend on it at runtime.
 
@@ -75,8 +77,8 @@ Changes pushed to `main` are deployed by GitHub Pages through:
 - Do not make phone runtime behavior depend on this site.
 - Keep private source automation in the private repo.
 
-## License Status
+## License
 
-No final license file has been added yet. Until a clear license is added, treat
-the website assets and code as project material and do not assume they can be
-reused outside this repository.
+Website code and documentation are Apache-2.0. Carrier data is stored in the
+separate public database repository and follows its `DATA-LICENSE.md` and
+`SOURCES.md` notices.
