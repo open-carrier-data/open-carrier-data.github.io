@@ -25,10 +25,10 @@ It should help a new reader quickly understand:
 - how ROMs, apps, and build tools should consume the data;
 - how to report missing or wrong carrier data;
 - what private data must never be submitted.
-- why stale private vendor/OEM snapshots should not be published as stable
-  data.
-- how exact source revisions, source terms, conflicts, and quality gates are
-  exposed in the public evidence index.
+- why a source revision date and a successful check date mean different things;
+- how exact source revisions, check dates, fact-level sources, source terms,
+  conflicts, and quality gates are exposed in the public evidence index;
+- how issue forms are converted into validated community-claim pull requests.
 
 The website is documentation only. Phones should not depend on it at runtime.
 

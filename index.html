@@ -49,8 +49,8 @@
             Open Carrier Data stores neutral carrier profiles for APNs, MMS,
             IMS capabilities, RCS, eSIM support, and Android CarrierConfig
             values. Stable data comes from maintained sources. Community input
-            is accepted as checked claims, kept separate, and promoted only when
-            it is safe enough.
+            is accepted as validated claims and kept separate from stable phone
+            defaults.
           </p>
           <div class="hero-actions" aria-label="Primary links">
             <a class="button primary" href="#snapshot">Use the snapshot</a>
@@ -125,9 +125,10 @@
           <p class="eyebrow">Sources</p>
           <h2>Every public snapshot names its inputs.</h2>
           <p>
-            Public upstreams are recorded by full Git commit ID and revision
-            date. Samsung observations carry OMC scope and a recent checked
-            date. Source records older than 180 days fail validation.
+            Public upstreams record both the exact Git revision date and the
+            last successful automation check. Samsung observations need recent
+            checks and complete OMC scope. Checks older than 180 days are
+            quarantined.
           </p>
         </div>
 
@@ -154,8 +155,8 @@
           <strong>Check the evidence, not a vague “updated” badge</strong>
           <p>
             <code>generated/evidence-index.json</code> records exact source
-            revisions, profile scope, conflicts, and quality gates for the
-            current database.
+            revisions, check dates, profile scope, source support for each
+            exact fact, conflicts, and quality gates for the current database.
           </p>
         </div>
       </section>
@@ -211,10 +212,10 @@
           <p>
             Community reports are important for edge cases and fast fixes, but
             they should not directly overwrite stable phone configuration. A
-            claim says what should change, how it was tested, when it was last
-            verified, and when it expires.
-            The validator computes overlap and conflicts against stable data;
-            contributors cannot self-approve claims.
+            claim says what should change, how it was tested, and when the
+            evidence was collected. The validator computes confidence, risk,
+            expiry, overlap, and conflicts against stable data; contributors
+            cannot self-approve claims.
           </p>
         </div>
 
@@ -284,8 +285,7 @@
       "summary": "MMS send and receive were tested on one device."
     }
   ],
-  "last_verified": "2026-07-05",
-  "expires": "2027-07-05"
+  "last_verified": "2026-07-05"
 }</code></pre>
           </div>
 
@@ -330,8 +330,8 @@
             <h3>Tested a specific fix</h3>
             <p>
               Open a tested-claim issue, or fork the repo and submit a pull
-              request with a claim, evidence, test date, safe match details,
-              and an expiry date.
+              request. Issue automation creates and validates the claim JSON;
+              the validator chooses its risk and expiry.
             </p>
           </article>
           <article>
@@ -346,11 +346,11 @@
         <div class="note-box">
           <strong>Stable means current enough</strong>
           <p>
-            Private vendor or OEM snapshots must be refreshed and carry a
-            recent checked date before they can affect stable data. Checks
-            older than about six months are treated as stale. If a source stops
-            being maintained, missing data is safer than stale data that still
-            looks official.
+            Private vendor or OEM snapshots need proof of freshness. A recent
+            import date alone is not proof: automation needs a successful live
+            check or a real artifact release date. Checks older than about six
+            months are quarantined. Missing data is safer than stale data that
+            still looks official.
           </p>
         </div>
 
@@ -360,8 +360,9 @@
             <p>
               Carrier name, country, public brand, MCC/MNC, Android carrier ID,
               SPN, GID prefix, public source link, tested feature, result, and
-              test date. Public APN usernames/passwords are okay only when they
-              are carrier settings, not private account credentials.
+              test date. Public APN usernames/passwords are okay only when a
+              public carrier or maintained-source URL proves they are shared
+              carrier settings, not private account credentials.
             </p>
           </div>
           <div class="note-box">
@@ -405,6 +406,7 @@
               <li>Read <code>generated/evidence-index.json</code> for exact sources and merge decisions.</li>
               <li>Use <code>generated/android/mccmnc-index.json</code> when the input is a SIM MCC/MNC.</li>
               <li>Use <code>generated/android/carrier-id-index.json</code> when Android already resolved a carrier ID.</li>
+              <li>Match every populated field and apply all results from generic to specific.</li>
               <li>Use <code>generated/android/carrier-config-list.xml</code> when tooling wants Android-style CarrierConfig XML.</li>
               <li>Generate local CarrierConfig, APN, or ROM-specific data.</li>
               <li>Package or update that generated data through your normal release path.</li>
@@ -519,8 +521,9 @@ PY</code></pre>
             Android build must use the same version. CarrierConfig XML also
             cannot represent GID prefixes safely because Android compares that
             XML field exactly. Such profiles stay in neutral JSON and are
-            counted in <code>generated/android/metadata.json</code> instead of
-            being broadened.
+            listed by profile ID in <code>generated/android/metadata.json</code>
+            instead of being broadened. Carrier-ID-only APNs are emitted without
+            a generic MCC/MNC selector.
           </p>
         </div>
 
