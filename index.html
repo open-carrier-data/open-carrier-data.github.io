@@ -125,8 +125,8 @@
           <p class="eyebrow">Sources</p>
           <h2>Every public snapshot names its inputs.</h2>
           <p>
-            Public upstreams record both the exact Git revision date and the
-            last successful automation check. Google Pixel data is checked
+            Every upstream records an exact Git revision or content hash and
+            the last successful automation check. Google Pixel data is checked
             against Google's current per-device update path. Samsung
             observations need recent checks and complete device scope. Checks
             older than 180 days are quarantined.
@@ -144,7 +144,7 @@
           </article>
           <article>
             <h3>Apple bundles</h3>
-            <p>The current mirror declares no license. Only narrow transformed facts are published.</p>
+            <p>Apple's official carrier index is checked directly. Only packages that match Apple's indexed digest can feed sanitized facts.</p>
           </article>
           <article>
             <h3>Google Pixel data</h3>
@@ -166,6 +166,46 @@
             <code>generated/evidence-index.json</code> records exact source
             revisions, check dates, profile scope, source support for each
             exact fact, conflicts, and quality gates for the current database.
+          </p>
+        </div>
+      </section>
+
+      <section id="coverage" class="content-section muted">
+        <div class="section-heading">
+          <p class="eyebrow">Coverage</p>
+          <h2>Device discovery is measured without guessing support.</h2>
+          <p>
+            The coverage catalog keeps device identities, vendor artifacts,
+            and exact model-scoped carrier evidence separate. A device being
+            listed does not claim that every carrier feature works on it.
+          </p>
+        </div>
+
+        <div class="detail-grid">
+          <article>
+            <h3>Android inventory</h3>
+            <p>Google's current public Google Play device list supplies brand, device, model, and marketing-name identities.</p>
+          </article>
+          <article>
+            <h3>Apple inventory</h3>
+            <p>Apple's official carrier index supplies product types and exact or family-level carrier artifact scope.</p>
+          </article>
+          <article>
+            <h3>Exact evidence</h3>
+            <p>Samsung and Google observations are joined only by exact device-code or model matches, never by a similar marketing name.</p>
+          </article>
+          <article>
+            <h3>Verification</h3>
+            <p>Indexed and downloaded-and-verified artifacts are labeled separately. Failed checks stay quarantined.</p>
+          </article>
+        </div>
+
+        <div class="note-box">
+          <strong>Read the small summary first</strong>
+          <p>
+            <code>generated/devices/index.json</code> reports current and
+            historical identities, exact evidence matches, artifact scope,
+            verification, and quarantine counts.
           </p>
         </div>
       </section>
@@ -739,6 +779,10 @@ print(f"found {len(profiles)} candidate profiles")</code></pre>
           <a href="https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/main/generated/evidence-index.json" class="next-link">
             Source evidence
             <span>Inspect exact revisions, scope, conflicts, and quality gates</span>
+          </a>
+          <a href="https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/main/generated/devices/index.json" class="next-link">
+            Device coverage
+            <span>Inspect inventory, exact model evidence, and artifact verification</span>
           </a>
           <a href="https://github.com/open-carrier-data/open-carrier-data/blob/main/SOURCES.md" class="next-link">
             Source policy
