@@ -126,9 +126,10 @@
           <h2>Every public snapshot names its inputs.</h2>
           <p>
             Public upstreams record both the exact Git revision date and the
-            last successful automation check. Samsung observations need recent
-            checks and complete OMC scope. Checks older than 180 days are
-            quarantined.
+            last successful automation check. Google Pixel data is checked
+            against Google's current per-device update path. Samsung
+            observations need recent checks and complete device scope. Checks
+            older than 180 days are quarantined.
           </p>
         </div>
 
@@ -146,8 +147,16 @@
             <p>The current mirror declares no license. Only narrow transformed facts are published.</p>
           </article>
           <article>
+            <h3>Google Pixel data</h3>
+            <p>Current decoded Pixel snapshots are checked for newer Google updates, then reduced to safe carrier facts.</p>
+          </article>
+          <article>
             <h3>Samsung OMC</h3>
             <p>Firmware baselines and GRAS updates are processed privately; raw vendor material is never published.</p>
+          </article>
+          <article>
+            <h3>Samsung IMS evidence</h3>
+            <p>Firmware-scoped feature observations are published without exposing raw Samsung profiles or parameters.</p>
           </article>
         </div>
 
