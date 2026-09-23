@@ -38,3 +38,7 @@ database repository at the commit named in the "Status" section. Re-check them
 against its `README.md`, `SOURCES.md`, `generated/devices/index.json`, and
 `generated/evidence-index.json` before you change a number here.
 Website code and text are Apache-2.0. See `LICENSE`.
+
+## Refresh the numbers
+
+After the public repository changes, run `python3 tools/update_numbers.py <public-checkout> <YYYY-MM-DD>` from this folder. It rewrites the status heading date, the profile and device counts, and the status table from the public files, and fails if a marker is missing.
