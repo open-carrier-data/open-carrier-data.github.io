@@ -1,84 +1,40 @@
-# Open Carrier Data Website
+# Open Carrier Data website
 
-This repository publishes the static documentation website for Open Carrier
-Data:
+This repository holds the one-page documentation site at
+https://open-carrier-data.github.io/. It is the plain-language front door for
+the public database at https://github.com/open-carrier-data/open-carrier-data.
+Carrier data does not live here, and phones never load this site at runtime.
 
-```text
-https://open-carrier-data.github.io/
+## What each file does
+
+| File | Purpose |
+| --- | --- |
+| `index.html` | The whole page. One `h1`, sections from hero to contribute. |
+| `styles.css` | Layout and colors. System fonts, light and dark by `prefers-color-scheme`. |
+| `app.js` | Copy buttons only. The page works with JavaScript off. |
+| `assets/` | Icon, favicon, and social preview images. |
+| `.nojekyll` | Tells GitHub Pages to publish the files as they are. |
+| `.github/workflows/pages.yml` | Deploys the repository root to GitHub Pages. |
+
+## How the page deploys
+
+A push to `main` runs `.github/workflows/pages.yml`, which uploads the
+repository root as the Pages artifact and deploys it. No build step exists.
+
+## Preview locally
+
+To serve the page on port 8000, run this from the repository root.
+
+```bash
+python3 -m http.server
 ```
 
-The carrier database itself lives in:
+Then open http://localhost:8000/ in a browser.
 
-```text
-https://github.com/open-carrier-data/open-carrier-data
-```
+## Where the facts come from
 
-## Purpose
-
-The website is the plain-language front door for the project.
-
-It should help a new reader quickly understand:
-
-- what Open Carrier Data is;
-- why carrier settings need a shared database;
-- how stable data, community claims, and candidate claims differ;
-- how ROMs, apps, and build tools should consume the data;
-- how to report missing or wrong carrier data;
-- what private data must never be submitted.
-- why a source revision date and a successful check date mean different things;
-- how exact source revisions, check dates, fact-level sources, source terms,
-  conflicts, and quality gates are exposed in the public evidence index;
-- how issue forms are converted into validated community-claim pull requests.
-
-The website is documentation only. Phones should not depend on it at runtime.
-
-## Files
-
-```text
-index.html          main page content
-styles.css          layout and visual styling
-app.js              small navigation behavior
-assets/             icon, favicon, and social preview images
-.github/workflows/  GitHub Pages deployment
-```
-
-Carrier profiles, schemas, validators, generated data, and community claims
-belong in the public database repo, not in this website repo.
-
-## Local Preview
-
-Open `index.html` in a browser, or serve this folder with any static file
-server.
-
-Before publishing, check:
-
-- the first screen says what the project is without needing background
-  knowledge;
-- the main buttons point to the public repo, the docs sections, and the issue
-  flow;
-- contribution text makes clear that users do not need repo write access;
-- long code blocks fit on mobile screens;
-- links to the public repo, snapshot, schema, and issue forms still work.
-
-## Deployment
-
-Changes pushed to `main` are deployed by GitHub Pages through:
-
-```text
-.github/workflows/pages.yml
-```
-
-## Rules
-
-- Keep the site simple and readable.
-- Prefer examples over abstract wording.
-- Do not hide important limits.
-- Do not store carrier data here.
-- Do not make phone runtime behavior depend on this site.
-- Keep private source automation in the private repo.
-
-## License
-
-Website code and documentation are Apache-2.0. Carrier data is stored in the
-separate public database repository and follows its `DATA-LICENSE.md` and
-`SOURCES.md` notices.
+Counts, file names, commands, and source terms on the page come from the public
+database repository at the commit named in the "Status" section. Re-check them
+against its `README.md`, `SOURCES.md`, `generated/devices/index.json`, and
+`generated/evidence-index.json` before you change a number here.
+Website code and text are Apache-2.0. See `LICENSE`.
