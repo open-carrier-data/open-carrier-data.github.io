@@ -186,17 +186,12 @@ curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/m
             <tr><th scope="col">Status</th><th scope="col">Devices</th><th scope="col">Meaning</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>inventory_only</code></td><td>32,173</td><td>Listed by a maintained inventory, nothing else known</td></tr>
-            <tr><td><code>source_terms_restrict_extraction</code></td><td>5,454</td><td>Official firmware source known, its terms block inspection</td></tr>
-            <tr><td><code>exact_source_indexed</code></td><td>1,864</td><td>An exact vendor artifact is indexed with a digest</td></tr>
-            <tr><td><code>source_checked_no_artifact</code></td><td>1,448</td><td>Vendor scope checked in full, no current artifact</td></tr>
-            <tr><td><code>exact_source_extracted</code></td><td>431</td><td>Artifact downloaded and integrity-checked</td></tr>
-            <tr><td><code>source_not_queryable</code></td><td>302</td><td>Inventory lacks the identifier the vendor service needs</td></tr>
-            <tr><td><code>exact_carrier_data_observed</code></td><td>257</td><td>Carrier evidence names this exact model</td></tr>
-            <tr><td><code>source_transport_untrusted</code></td><td>218</td><td>Source known, transport lacks a trustworthy digest</td></tr>
-            <tr><td><code>platform_out_of_scope</code></td><td>97</td><td>ChromeOS, emulator, or similar target</td></tr>
-            <tr><td><code>carrier_data_not_applicable</code></td><td>8</td><td>Official source says the exact variant has no cellular radio</td></tr>
-            <tr><td><code>source_discovery_in_progress</code></td><td>7</td><td>Scheduled vendor checks still have work left</td></tr>
+            <tr><td><code>inventory_only</code></td><td>39,205</td><td>Listed by a maintained inventory, nothing else known</td></tr>
+            <tr><td><code>source_checked_no_artifact</code></td><td>1,254</td><td>Vendor scope checked in full, no current artifact</td></tr>
+            <tr><td><code>exact_source_indexed</code></td><td>1,042</td><td>An exact vendor artifact is indexed with a digest</td></tr>
+            <tr><td><code>exact_source_extracted</code></td><td>426</td><td>Artifact downloaded and integrity-checked</td></tr>
+            <tr><td><code>exact_carrier_data_observed</code></td><td>262</td><td>Carrier evidence names this exact model</td></tr>
+            <tr><td><code>source_not_queryable</code></td><td>70</td><td>Inventory lacks the identifier the vendor service needs</td></tr>
           </tbody>
         </table>
         <p>To re-check these counts, run this from the clone.</p>
@@ -204,7 +199,7 @@ curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/m
           <button type="button" class="copy" data-copy="cmd-counts" aria-label="Copy the count commands">Copy</button>
 <pre><code id="cmd-counts">ls carriers/open | wc -l
 python3 tools/validate_device_catalog.py generated/devices
-python3 -m json.tool generated/devices/index.json | grep -m1 -A 11 '"carrier_data_coverage_counts"'
+python3 -c 'import json; print(json.load(open("generated/devices/index.json"))["platforms"]["android"]["carrier_data_coverage_counts"])'
 head -2 generated/android/apns-conf.xml
 python3 -c 'import json; e=json.load(open("generated/evidence-index.json")); print(sum(p["verified_observation_count"] for p in e["profiles"]), min(s["checked_at"] for s in e["source_snapshots"]))'</code></pre>
         </div>
