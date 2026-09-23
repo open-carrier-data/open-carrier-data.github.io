@@ -154,7 +154,8 @@ curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/m
           <li>
             <strong>Generated files.</strong> Generators build the Android
             files and the device catalog. Public CI runs the validators on
-            every change to <code>main</code>.
+            every change to <code>main</code> and every pull request, and a
+            daily job runs them in strict mode.
           </li>
         </ol>
         <p>
@@ -223,10 +224,12 @@ python3 -c 'import json; e=json.load(open("generated/evidence-index.json")); pri
           </li>
           <li>
             The validators reject a source snapshot whose <code>checked_at</code>
-            is older than 180 days. The oldest public check is 2026-07-13, so
-            from 2027-01-10 the validators fail and the daily public CI turns
-            red until sources are re-checked. The data does not change by
-            itself. It stops validating.
+            is older than 180 days when run with <code>--freshness fail</code>.
+            The oldest public check is 2026-07-13, so from 2027-01-10 the daily
+            public job fails that check and opens an issue labeled
+            <code>stale-data</code>. Pushes and pull requests keep passing in
+            warn mode. The data does not change by itself. It stops passing
+            the strict check.
           </li>
           <li>
             Listing is not support. A device in the catalog and a carrier in
