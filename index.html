@@ -79,7 +79,7 @@
             <h3>A device catalog with honest status counts</h3>
             <p>
               <a href="https://github.com/open-carrier-data/open-carrier-data/tree/main/generated/devices"><code>generated/devices/</code></a>
-              lists 42,259 Android devices and 180 Apple products. Every device
+              lists 43,007 Android devices and 183 Apple products. Every device
               carries one status that says how far carrier-data discovery got.
               A listed device is not a supported device.
             </p>
@@ -102,7 +102,7 @@ python3 tools/validate_device_catalog.py generated/devices</code></pre>
         </div>
 
         <h3>Download one generated file</h3>
-        <p>To take only the stable snapshot, which lists all 6,748 profiles, or one Android file, download it from the main branch.</p>
+        <p>To take only the stable snapshot, which lists all 7,911 profiles, or one Android file, download it from the main branch.</p>
         <div class="code-block">
           <button type="button" class="copy" data-copy="cmd-download" aria-label="Copy the download commands">Copy</button>
 <pre><code id="cmd-download">curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/main/generated/index.json
@@ -167,12 +167,12 @@ curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/m
       </section>
 
       <section id="status" aria-labelledby="status-title">
-        <h2 id="status-title">Status on 2026-09-23</h2>
-        <p>These are the numbers at public commit <code>9b683cda</code>.</p>
+        <h2 id="status-title">Status on 2026-09-24</h2>
+        <p>These are the numbers at public commit <code>ae1927f7</code>.</p>
         <dl class="stats">
-          <div><dt>Carrier profiles</dt><dd>6,748</dd></div>
-          <div><dt>Android devices</dt><dd>42,259</dd></div>
-          <div><dt>Apple products</dt><dd>180</dd></div>
+          <div><dt>Carrier profiles</dt><dd>7,911</dd></div>
+          <div><dt>Android devices</dt><dd>43,007</dd></div>
+          <div><dt>Apple products</dt><dd>183</dd></div>
           <div><dt>Profiles verified on a phone</dt><dd>0</dd></div>
         </dl>
         <p>
@@ -187,11 +187,11 @@ curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/m
             <tr><th scope="col">Status</th><th scope="col">Devices</th><th scope="col">Meaning</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>inventory_only</code></td><td>39,205</td><td>Listed by a maintained inventory, nothing else known</td></tr>
-            <tr><td><code>source_checked_no_artifact</code></td><td>1,254</td><td>Vendor scope checked in full, no current artifact</td></tr>
+            <tr><td><code>inventory_only</code></td><td>39,930</td><td>Listed by a maintained inventory, nothing else known</td></tr>
+            <tr><td><code>source_checked_no_artifact</code></td><td>1,264</td><td>Vendor scope checked in full, no current artifact</td></tr>
             <tr><td><code>exact_source_indexed</code></td><td>1,042</td><td>An exact vendor artifact is indexed with a digest</td></tr>
-            <tr><td><code>exact_source_extracted</code></td><td>426</td><td>Artifact downloaded and integrity-checked</td></tr>
-            <tr><td><code>exact_carrier_data_observed</code></td><td>262</td><td>Carrier evidence names this exact model</td></tr>
+            <tr><td><code>exact_source_extracted</code></td><td>435</td><td>Artifact downloaded and integrity-checked</td></tr>
+            <tr><td><code>exact_carrier_data_observed</code></td><td>266</td><td>Carrier evidence names this exact model</td></tr>
             <tr><td><code>source_not_queryable</code></td><td>70</td><td>Inventory lacks the identifier the vendor service needs</td></tr>
           </tbody>
         </table>
@@ -225,11 +225,12 @@ python3 -c 'import json; e=json.load(open("generated/evidence-index.json")); pri
           <li>
             The validators reject a source snapshot whose <code>checked_at</code>
             is older than 180 days when run with <code>--freshness fail</code>.
-            The oldest public check is 2026-07-13, so from 2027-01-10 the daily
-            public job fails that check and opens an issue labeled
-            <code>stale-data</code>. Pushes and pull requests keep passing in
-            warn mode. The data does not change by itself. It stops passing
-            the strict check.
+            Ten source families were re-checked on 2026-09-24, but the window
+            follows the oldest observation, a Samsung one from 2026-07-13, so
+            from 2027-01-10 the daily public job fails that check and opens an
+            issue labeled <code>stale-data</code>. Pushes and pull requests
+            keep passing in warn mode. The data does not change by itself. It
+            stops passing the strict check.
           </li>
           <li>
             Listing is not support. A device in the catalog and a carrier in
