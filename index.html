@@ -225,12 +225,14 @@ python3 -c 'import json; e=json.load(open("generated/evidence-index.json")); pri
           <li>
             The validators reject a source snapshot whose <code>checked_at</code>
             is older than 180 days when run with <code>--freshness fail</code>.
-            A hosted job re-checks ten source families every week, but the
-            window follows the oldest observation, a Samsung one from 2026-07-13, so
-            from 2027-01-10 the daily public job fails that check and opens an
-            issue labeled <code>stale-data</code>. Pushes and pull requests
-            keep passing in warn mode. Samsung does not change by itself, and
-            Samsung sets the window.
+            A hosted job re-checks ten source families every week, and since
+            2026-09-24 the Samsung lane re-extracts up to 50 firmware carrier
+            packages a day. The window still follows the oldest observation, a
+            Samsung one from 2026-07-13, until every Samsung scope has been
+            re-extracted or the quarantine on 2027-01-10 removes what remains.
+            On that day the daily public job fails the check once and opens an
+            issue labeled <code>stale-data</code>; the next publish closes it.
+            Pushes and pull requests keep passing in warn mode.
           </li>
           <li>
             Listing is not support. A device in the catalog and a carrier in
