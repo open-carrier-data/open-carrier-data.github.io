@@ -41,4 +41,4 @@ Website code and text are Apache-2.0. See `LICENSE`.
 
 ## Refresh the numbers
 
-After the public repository changes, run `python3 tools/update_numbers.py <public-checkout> <YYYY-MM-DD>` from this folder. It rewrites the status heading date, the profile and device counts, and the status table from the public files, and fails if a marker is missing.
+`.github/workflows/update-numbers.yml` runs every Monday at 06:00 UTC, after the private import and publish, and on dispatch. It checks out the public repository, runs `python3 tools/update_numbers.py public <YYYY-MM-DD> <public-commit>`, commits when a number changed, and dispatches the Pages deploy. To do it by hand, run the same command from this folder against a public checkout. It rewrites the status heading date, the quoted public commit, the profile, device, and product counts, and the status table, and fails if a marker is missing.
