@@ -229,8 +229,9 @@ python3 -c 'import json; e=json.load(open("generated/evidence-index.json")); pri
             follows the oldest observation, a Samsung one from 2026-07-13, so
             from 2027-01-10 the daily public job fails that check and opens an
             issue labeled <code>stale-data</code>. Pushes and pull requests
-            keep passing in warn mode. The data does not change by itself. It
-            stops passing the strict check.
+            keep passing in warn mode. A weekly hosted job re-checks the other
+            ten families. Samsung does not change by itself, and Samsung sets
+            the window.
           </li>
           <li>
             Listing is not support. A device in the catalog and a carrier in
