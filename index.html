@@ -79,7 +79,7 @@
             <h3>A device catalog with honest status counts</h3>
             <p>
               <a href="https://github.com/open-carrier-data/open-carrier-data/tree/main/generated/devices"><code>generated/devices/</code></a>
-              lists 43,007 Android devices and 183 Apple products. Every device
+              lists 42,401 Android devices and 183 Apple products. Every device
               carries one status that says how far carrier-data discovery got.
               A listed device is not a supported device.
             </p>
@@ -102,7 +102,7 @@ python3 tools/validate_device_catalog.py generated/devices</code></pre>
         </div>
 
         <h3>Download one generated file</h3>
-        <p>To take only the stable snapshot, which lists all 7,911 profiles, or one Android file, download it from the main branch.</p>
+        <p>To take only the stable snapshot, which lists all 7,765 profiles, or one Android file, download it from the main branch.</p>
         <div class="code-block">
           <button type="button" class="copy" data-copy="cmd-download" aria-label="Copy the download commands">Copy</button>
 <pre><code id="cmd-download">curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/main/generated/index.json
@@ -168,10 +168,10 @@ curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/m
 
       <section id="status" aria-labelledby="status-title">
         <h2 id="status-title">Status on 2026-09-24</h2>
-        <p>These are the numbers at public commit <code>cf433e4</code>.</p>
+        <p>These are the numbers at public commit <code>b55eec2</code>.</p>
         <dl class="stats">
-          <div><dt>Carrier profiles</dt><dd>7,911</dd></div>
-          <div><dt>Android devices</dt><dd>43,007</dd></div>
+          <div><dt>Carrier profiles</dt><dd>7,765</dd></div>
+          <div><dt>Android devices</dt><dd>42,401</dd></div>
           <div><dt>Apple products</dt><dd>183</dd></div>
           <div><dt>Profiles verified on a phone</dt><dd>0</dd></div>
         </dl>
@@ -187,7 +187,7 @@ curl -LO https://raw.githubusercontent.com/open-carrier-data/open-carrier-data/m
             <tr><th scope="col">Status</th><th scope="col">Devices</th><th scope="col">Meaning</th></tr>
           </thead>
           <tbody>
-            <tr><td><code>inventory_only</code></td><td>39,911</td><td>Listed by a maintained inventory, nothing else known</td></tr>
+            <tr><td><code>inventory_only</code></td><td>39,305</td><td>Listed by a maintained inventory, nothing else known</td></tr>
             <tr><td><code>source_checked_no_artifact</code></td><td>1,272</td><td>Vendor scope checked in full, no current artifact</td></tr>
             <tr><td><code>exact_source_indexed</code></td><td>1,070</td><td>An exact vendor artifact is indexed with a digest</td></tr>
             <tr><td><code>exact_source_extracted</code></td><td>418</td><td>Artifact downloaded and integrity-checked</td></tr>
