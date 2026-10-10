@@ -215,10 +215,28 @@ python3 -c 'import json; e=json.load(open("generated/evidence-index.json")); pri
             resolves the <code>26202</code> profiles with Vodafone's settings.
           </li>
           <li>
-            When sources disagree on a CarrierConfig value, an add-on, or an
-            APN row, the sanitizer omits the value instead of picking one.
-            Conflicting capabilities become <code>conditional</code>. The
-            evidence index records each omission.
+            When sources disagree on a CarrierConfig value or an add-on, the
+            sanitizer leaves the value out instead of picking one. Conflicting
+            APN rows are all published as variants, current phone makers'
+            rows first. Conflicting capabilities become
+            <code>conditional</code>. The evidence index records each conflict.
+          </li>
+          <li>
+            The four capability values in plain words.
+            <code>supported</code>: at least one phone maker's settings for
+            this SIM turn the feature on; it does not tell you that the carrier
+            still offers it, that your plan includes it, or that your phone is
+            allowed. <code>conditional</code>: the sources disagree; it often
+            works. <code>unsupported</code>: the carrier's own settings, or two
+            independent sources, turn it off. <code>unknown</code>: no
+            reliable source, not a no.
+          </li>
+          <li>
+            A carrier can still block a feature its settings turn on: a list
+            of approved phone models, an option you must book, a service the
+            operator has ended (MMS in Germany), roaming limits, or the Wi-Fi
+            network you use. Only a test with your SIM, plan and phone shows
+            these.
           </li>
           <li>
             The validators reject a source snapshot whose <code>checked_at</code>
