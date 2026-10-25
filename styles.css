@@ -9,6 +9,8 @@
   --brand-ink: #ffffff;
   --code-bg: #eef1f5;
   --focus: #b5470f;
+  --notice-bg: #fdf1e8;
+  --notice-line: #b5470f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,6 +24,8 @@
     --brand-ink: #10201e;
     --code-bg: #10141a;
     --focus: #ffb27a;
+    --notice-bg: #2a2019;
+    --notice-line: #ffb27a;
   }
 }
 
@@ -124,6 +128,19 @@ main,
 
 .site-header nav a:hover {
   text-decoration: underline;
+}
+
+.notice {
+  margin: 24px 0 0;
+  padding: 14px 16px;
+  background: var(--notice-bg);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--notice-line);
+  border-radius: 8px;
+}
+
+.notice p {
+  margin: 0;
 }
 
 main > section {

@@ -1,5 +1,7 @@
 # Open Carrier Data website
 
+> **Early development.** Open Carrier Data is in early development. Data, formats, tools and apps change often, and values can be wrong or missing. Don't rely on it for anything important yet. Feedback and reports are welcome.
+
 This repository holds the one-page documentation site at
 https://open-carrier-data.github.io/. It is the plain-language front door for
 the public database at https://github.com/open-carrier-data/open-carrier-data.
@@ -9,7 +11,7 @@ Carrier data does not live here, and phones never load this site at runtime.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | The whole page. One `h1`, sections from hero to contribute. |
+| `index.html` | The whole page. One `h1`, the early development notice, then sections from hero to contribute. |
 | `styles.css` | Layout and colors. System fonts, light and dark by `prefers-color-scheme`. |
 | `app.js` | Copy buttons only. The page works with JavaScript off. |
 | `assets/` | Icon, favicon, and social preview images. |
