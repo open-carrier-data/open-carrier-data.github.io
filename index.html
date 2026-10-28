@@ -252,7 +252,7 @@ python3 -c 'import json; e=json.load(open("generated/evidence-index.json")); pri
           <li>
             The validators reject a source snapshot whose <code>checked_at</code>
             is older than 180 days when run with <code>--freshness fail</code>.
-            A hosted job re-checks ten source families every week, and since
+            A weekly job on the owner's runner re-checks ten source families, and since
             2026-09-24 the Samsung lane re-extracts up to 50 firmware carrier
             packages a day. The window still follows the oldest observation, a
             Samsung one from 2026-07-13, until every Samsung scope has been
